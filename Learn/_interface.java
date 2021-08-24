@@ -1,3 +1,4 @@
+package Learn;
 public class _interface {
     public static void main(String[] args) {
         Rabbit rabbit = new Rabbit();
@@ -6,6 +7,9 @@ public class _interface {
         Hawk hawk = new Hawk();
         hawk.hunt();
         
+        Fish fish = new Fish();
+        fish.flee();
+        fish.hunt();
     }
 }
 

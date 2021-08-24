@@ -1,6 +1,6 @@
 package Learn;
 
-public class inhetitance {
+public class inheritance {
     public static void main(String[] args) {
         Car2 car = new Car2();
         Bicycle bike = new Bicycle();
