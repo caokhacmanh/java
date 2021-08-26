@@ -9,10 +9,12 @@ public class fileReader {
         // should be surrounded by try/catch because the code below maybe dangerous
         try {
             FileReader reader = new FileReader("text.txt");
-            int data = reader.read();
+            int data = reader.read(); // it also read the \n
             while (data != -1) {
                 System.out.print((char) data); // make sure use print, not printLn
+                data = reader.read();
             }
+            reader.close();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
