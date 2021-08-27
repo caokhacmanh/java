@@ -2,82 +2,191 @@ package GUI_Swing;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 public class GUI {
     public static void main(String[] args) {
-
         new GUIFrame();
-        
-    }
+    }    
 }
 
-class GUIFrame extends JFrame{
+
+
+class GUIFrame extends JFrame implements ActionListener{
+
+    static boolean status = false;
+    static double tmp = 0, firstVal = 0, secondVal = 0, finalAns = 0;
+    static char mathKey;
+
+    GUIButton buttNum1 = new GUIButton("1", 0,65);
+    GUIButton buttNum2 = new GUIButton("2", 65,65);
+    GUIButton buttNum3 = new GUIButton("3", 130,65);
+    GUIButton buttNum4 = new GUIButton("4", 0,130);
+    GUIButton buttNum5 = new GUIButton("5", 65,130);
+    GUIButton buttNum6 = new GUIButton("6", 130,130);
+    GUIButton buttNum7 = new GUIButton("7", 0,195);
+    GUIButton buttNum8 = new GUIButton("8", 65,195);
+    GUIButton buttNum9 = new GUIButton("9", 130,195);
+    GUIButton buttNum0 = new GUIButton("0", 0,260);
+    GUIButton buttMulti = new GUIButton("x", 195,65);
+    GUIButton buttAdd = new GUIButton("+", 195,130);
+    GUIButton buttMinu = new GUIButton("-", 195,195);
+    GUIButton buttDivi = new GUIButton("/", 30,260);
+    
+    JPanel displayPanel = new JPanel();
+
+    JLabel displayLabel = new JLabel();
 
     GUIFrame(){
+        buttNum1.addActionListener(this);
+        buttNum2.addActionListener(this);
+        buttNum3.addActionListener(this);
+        buttNum4.addActionListener(this);
+        buttNum5.addActionListener(this);
+        buttNum6.addActionListener(this);
+        buttNum7.addActionListener(this);
+        buttNum8.addActionListener(this);
+        buttNum9.addActionListener(this);
+        buttNum0.addActionListener(this);
 
-        GUIPanel GUI1 = new GUIPanel("Panel1", 0, 0);
-        GUIPanel GUI2 = new GUIPanel("Panel2", 210, 0);
-        GUIPanel GUI3 = new GUIPanel("Panel3", 0, 210);
-        GUIPanel GUI4 = new GUIPanel("Panel4", 210, 210);
-    
-        this.setSize(800,600);
-        this.setTitle("Programed by H1A4C3K");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(null);
+        displayLabel.setFont(new Font("Comic sans", Font.BOLD, 40));
+
+        displayPanel.setBounds(0, 0, 300, 65);
+        displayPanel.setBackground(Color.LIGHT_GRAY);
+        displayPanel.add(displayLabel);
+
+        this.setSize(300,500);
+        this.setBackground(new Color(240,240,240));
+        this.setTitle("Calculator by H1A4C3K");
         this.setVisible(true);
-        this.add(GUI1.panel);
-        this.add(GUI2.panel);
-        this.add(GUI3.panel);
-        this.add(GUI4.panel);
+        this.setResizable(false);
+        this.setLayout(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        this.add(buttNum1); 
+        this.add(buttNum2); 
+        this.add(buttNum3); 
+        this.add(buttNum4); 
+        this.add(buttNum5); 
+        this.add(buttNum6); 
+        this.add(buttNum7); 
+        this.add(buttNum8);
+        this.add(buttNum9); 
+        this.add(buttNum0);
+        this.add(buttMulti);
+        this.add(buttAdd);
+        this.add(buttMinu);
+        this.add(buttDivi);
+        this.add(displayPanel);
     }
 
-}
 
-class GUIPanel extends JPanel implements ActionListener{
-
-    JButton button;
-    JPanel panel;
-
-    GUIPanel(String name, int x, int y){
-        ImageIcon icon1 = new ImageIcon("images/download.png");
-
-        button = new JButton();
-        button.setText(name);
-        button.setBounds(0, 100, 200, 100);
-        button.setFocusable(false);
-        button.setLayout(null);
-        button.setFont(new Font("Comic sans ms", Font.ITALIC, 25));
-        button.setBackground(Color.LIGHT_GRAY);
-        button.addActionListener(this);
-
-        JLabel label = new JLabel();
-        label.setBounds(0, 0, 200, 100);
-        label.setIcon(icon1);
-
-        panel = new JPanel();
-        panel.setBackground(Color.MAGENTA);
-        panel.setLayout(null);
-        panel.setBounds(x, y, 200, 200);
-        panel.setBorder(BorderFactory.createEtchedBorder());
-        panel.add(label);
-        panel.add(button);
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == button){
-            button.setEnabled(false);
-            button.setText("Disabled");
+        if(e.getSource() == buttAdd){
+            if(status){
+
+            }else{
+                mathKey = '+';
+            }
         }
+        if(e.getSource() == buttNum1) {
+            if(status){
+                secondVal = secondVal * 10 + 1;
+            }else{
+                firstVal = firstVal * 10 + 1;
+            }
+        }
+        if(e.getSource() == buttNum2) {
+            if(status){
+                secondVal = secondVal * 10 + 2;
+            }else{
+                firstVal = firstVal * 10 + 2;
+            }
+        }
+        if(e.getSource() == buttNum3) {
+            if(status){
+                secondVal = secondVal * 10 + 3;
+            }else{
+                firstVal = firstVal * 10 + 3;
+            }
+        }
+        if(e.getSource() == buttNum4) {
+            if(status){
+                secondVal = secondVal * 10 + 4;
+            }else{
+                firstVal = firstVal * 10 + 4;
+            }
+        }
+        if(e.getSource() == buttNum5) {
+            if(status){
+                secondVal = secondVal * 10 + 5;
+            }else{
+                firstVal = firstVal * 10 + 5;
+            }
+        }
+        if(e.getSource() == buttNum6) {
+            if(status){
+                secondVal = secondVal * 10 + 6;
+            }else{
+                firstVal = firstVal * 10 + 6;
+            }
+        }
+        if(e.getSource() == buttNum7) {
+            if(status){
+                secondVal = secondVal * 10 + 7;
+            }else{
+                firstVal = firstVal * 10 + 7;
+            }
+        }
+        if(e.getSource() == buttNum8) {
+            if(status){
+                secondVal = secondVal * 10 + 8;
+            }else{
+                firstVal = firstVal * 10 + 8;
+            }
+        }
+        if(e.getSource() == buttNum9) {
+            if(status){
+                secondVal = secondVal * 10 + 9;
+            }else{
+                firstVal = firstVal * 10 + 9;
+            }
+        }
+        if(e.getSource() == buttNum0) {
+            if(status){
+                secondVal = secondVal * 10;
+            }else{
+                firstVal = firstVal * 10;
+            }
+        }
+        displayLabel.setText("" + firstVal);
         
     }
 }
+
+
+
+class GUIButton extends JButton{
+    GUIButton(String buttonName, int buttonX, int buttonY){
+        this.setText(buttonName);
+        this.setLayout(null);
+        this.setFocusable(false);
+        this.setBounds(buttonX, buttonY, 65, 65);
+        this.setFont(new Font("Comic sans", Font.BOLD, 30));
+        
+    
+    }
+}
+
+
+// you can't see my testing cause i use windows+G
