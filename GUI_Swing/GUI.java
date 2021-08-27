@@ -39,7 +39,9 @@ class GUIFrame extends JFrame implements ActionListener{
     GUIButton buttMulti = new GUIButton("x", 195,65);
     GUIButton buttAdd = new GUIButton("+", 195,130);
     GUIButton buttMinu = new GUIButton("-", 195,195);
-    GUIButton buttDivi = new GUIButton("/", 30,260);
+    GUIButton buttDivi = new GUIButton("/", 195,260);
+    GUIButton submit = new GUIButton("=", 65,260);
+    GUIButton clear = new GUIButton("C", 130,260);
     
     JPanel displayPanel = new JPanel();
 
@@ -56,7 +58,13 @@ class GUIFrame extends JFrame implements ActionListener{
         buttNum8.addActionListener(this);
         buttNum9.addActionListener(this);
         buttNum0.addActionListener(this);
-
+        buttMulti.addActionListener(this);
+        buttAdd.addActionListener(this);
+        buttMinu.addActionListener(this);
+        buttDivi.addActionListener(this);
+        submit.addActionListener(this);
+        clear.addActionListener(this);
+        
         displayLabel.setFont(new Font("Comic sans", Font.BOLD, 40));
 
         displayPanel.setBounds(0, 0, 300, 65);
@@ -85,6 +93,8 @@ class GUIFrame extends JFrame implements ActionListener{
         this.add(buttAdd);
         this.add(buttMinu);
         this.add(buttDivi);
+        this.add(submit);
+        this.add(clear);
         this.add(displayPanel);
     }
 
@@ -93,83 +103,52 @@ class GUIFrame extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == buttAdd){
-            if(status){
+            secondVal = secondVal + firstVal;
+            firstVal = 0;
+            mathKey = '+';
+        }
+        if(e.getSource() == buttMinu){
+            secondVal = secondVal - firstVal;
+            firstVal = 0;
+            mathKey = '-';
+        }
+        if(e.getSource() == buttMulti){
+            secondVal = secondVal * firstVal;
+            firstVal = 0;
+            mathKey = '*';
+        }
+        if(e.getSource() == buttDivi){
+            secondVal = secondVal / firstVal;
+            firstVal = 0;
+            mathKey = '/';
+        }
+        if(e.getSource() == buttNum1) firstVal = firstVal * 10 + 1;
+        if(e.getSource() == buttNum2) firstVal = firstVal * 10 + 2;
+        if(e.getSource() == buttNum3) firstVal = firstVal * 10 + 3;
+        if(e.getSource() == buttNum4) firstVal = firstVal * 10 + 4;
+        if(e.getSource() == buttNum5) firstVal = firstVal * 10 + 5;
+        if(e.getSource() == buttNum6) firstVal = firstVal * 10 + 6;
+        if(e.getSource() == buttNum7) firstVal = firstVal * 10 + 7;
+        if(e.getSource() == buttNum8) firstVal = firstVal * 10 + 8;
+        if(e.getSource() == buttNum9) firstVal = firstVal * 10 + 9;
+        if(e.getSource() == buttNum0) firstVal = firstVal * 10;
 
-            }else{
-                mathKey = '+';
+        if(e.getSource() == submit){
+            switch(mathKey){
+                case '+': secondVal = secondVal + firstVal; break;
+                case '-': secondVal = secondVal - firstVal; break;
+                case '*': secondVal = secondVal * firstVal; break;
+                case '/': secondVal = secondVal / firstVal; break;
             }
+            displayLabel.setText("ans = " + secondVal);
+        }else{
+            displayLabel.setText("" + firstVal);
         }
-        if(e.getSource() == buttNum1) {
-            if(status){
-                secondVal = secondVal * 10 + 1;
-            }else{
-                firstVal = firstVal * 10 + 1;
-            }
+        if(e.getSource() == clear){
+            firstVal = 0;
+            secondVal = 0;
         }
-        if(e.getSource() == buttNum2) {
-            if(status){
-                secondVal = secondVal * 10 + 2;
-            }else{
-                firstVal = firstVal * 10 + 2;
-            }
-        }
-        if(e.getSource() == buttNum3) {
-            if(status){
-                secondVal = secondVal * 10 + 3;
-            }else{
-                firstVal = firstVal * 10 + 3;
-            }
-        }
-        if(e.getSource() == buttNum4) {
-            if(status){
-                secondVal = secondVal * 10 + 4;
-            }else{
-                firstVal = firstVal * 10 + 4;
-            }
-        }
-        if(e.getSource() == buttNum5) {
-            if(status){
-                secondVal = secondVal * 10 + 5;
-            }else{
-                firstVal = firstVal * 10 + 5;
-            }
-        }
-        if(e.getSource() == buttNum6) {
-            if(status){
-                secondVal = secondVal * 10 + 6;
-            }else{
-                firstVal = firstVal * 10 + 6;
-            }
-        }
-        if(e.getSource() == buttNum7) {
-            if(status){
-                secondVal = secondVal * 10 + 7;
-            }else{
-                firstVal = firstVal * 10 + 7;
-            }
-        }
-        if(e.getSource() == buttNum8) {
-            if(status){
-                secondVal = secondVal * 10 + 8;
-            }else{
-                firstVal = firstVal * 10 + 8;
-            }
-        }
-        if(e.getSource() == buttNum9) {
-            if(status){
-                secondVal = secondVal * 10 + 9;
-            }else{
-                firstVal = firstVal * 10 + 9;
-            }
-        }
-        if(e.getSource() == buttNum0) {
-            if(status){
-                secondVal = secondVal * 10;
-            }else{
-                firstVal = firstVal * 10;
-            }
-        }
-        displayLabel.setText("" + firstVal);
+        // System.out.println(mathKey); // for test
         
     }
 }
@@ -181,7 +160,7 @@ class GUIButton extends JButton{
         this.setText(buttonName);
         this.setLayout(null);
         this.setFocusable(false);
-        this.setBounds(buttonX, buttonY, 65, 65);
+        this.setBounds(buttonX, buttonY, 64, 64);
         this.setFont(new Font("Comic sans", Font.BOLD, 30));
         
     
